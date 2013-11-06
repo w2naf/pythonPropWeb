@@ -1,0 +1,9 @@
+*.pyc
+*.swp
+.DS_Store
+*.aux
+*.bbl
+*.log
+*.blg
+static/output/
+itshfbc/areadata/
