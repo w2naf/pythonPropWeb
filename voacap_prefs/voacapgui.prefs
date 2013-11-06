@@ -1,0 +1,53 @@
+[DEFAULT]
+foe = 1.0
+fof1 = 1.0
+fof2 = 1.0
+foes = 0.0
+model = 0
+path = 0
+mm_noise = -145.0
+min_toa = 3.0
+required_reliability = 90.0
+required_snr = 47.0
+mpath = 3.0
+delay = 0.1
+
+[site chooser]
+map_width = 763
+map_height = 259
+
+[area chooser]
+map_width = 384
+map_height = 192
+
+[antenna chooser]
+width = 500
+height = 400
+
+[tx site]
+name = 
+lat = 37.0
+lon = -80.0
+antenna = default/isotrope : ISOTROPE
+bearing = 0.0
+power = 100.0
+
+[rx site]
+name = 
+lat = 0.0
+lon = 0.0
+antenna = 
+bearing = 0.0
+
+[area]
+gridsize = 125
+year = 2013
+month = 2
+utc = 0
+frequency = 14.1
+sw_lat = -90.0
+sw_lon = -180.0
+ne_lat = 90.0
+ne_lon = 180.0
+templates_file = /home/w2naf/.voacapgui/area_templ.ex
+

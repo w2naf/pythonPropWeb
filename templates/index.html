@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Please choose a band:</h2>
+  {% for station in stations %}
+  <ul>
+    <li> <a href="/station/{{station.shortName}}">{{ station.stationName }}</a></li>
+  </ul>
+  {% endfor %}
+{% endblock %}
