@@ -188,6 +188,11 @@ class VOAAreaPlot:
         ax.label_outer()
         #print "opening: ",(in_file+'.vg'+str(vg_files[plot_ctr]))
         plot_ctr = 0
+
+#        dir_name = os.path.dirname(in_file)
+#        if not os.path.exists(dir_name):
+#            os.makedirs(dir_name)
+
         vgFile = open(in_file+'.vg'+str(vg_files[plot_ctr]))
         pattern = re.compile(r"[a-z]+")
 

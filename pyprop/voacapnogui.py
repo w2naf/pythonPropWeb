@@ -56,25 +56,6 @@ from voaFile import *
 class paramsObj: pass
 
 class VOACAP_GUI:
-#    itshfbc_path = os.path.expanduser("~")+os.sep+'itshfbc'
-#    prefs_dir = os.path.expanduser("~")+os.sep+'.voacapgui'+os.sep
-
-    itshfbc_path  = os.path.curdir+os.sep+'itshfbc'
-    prefs_dir     = os.path.curdir+os.sep+'voacap_prefs'+os.sep
-    itshfbc_path  = '/var/www/propWeb/itshfbc'
-    prefs_dir     = '/var/www/propWeb/voacap_prefs'+os.sep
-
-    prefs_path    = prefs_dir + 'voacapgui.prefs'
-    ssn_path      = prefs_dir + 'sunspot.predict'
-    # Check if the prefs directory exists, create one if if it doesn't
-    # (This is probably not required as the installer will probbaly end up
-    # creating and populating this directory.
-
-    if not os.path.isdir(prefs_dir):
-        os.makedirs(prefs_dir) 
-    
-    #ant_list = []
-
     params = paramsObj()
 
     firstCornerX = 0
@@ -103,6 +84,7 @@ class VOACAP_GUI:
 
         self.prefs_path    = self.prefs_dir + 'voacapgui.prefs'
         self.ssn_path      = self.prefs_dir + 'sunspot.predict'
+
         # Check if the prefs directory exists, create one if if it doesn't
         # (This is probably not required as the installer will probbaly end up
         # creating and populating this directory.
@@ -143,6 +125,10 @@ class VOACAP_GUI:
 #        self.freqspinbutton.set_value(14.1)
         
         self.ssn_repo = SSNFetch(save_location = self.ssn_path)
+        try:
+            self.ssn_repo.update_ssn_file() #Force an update
+        except:
+            pass
 
         _min, _max = self.ssn_repo.get_data_range()
         self.read_user_prefs()
@@ -406,12 +392,21 @@ class VOACAP_GUI:
 #            os.system('voacapl ~/itshfbc area calc pyArea.voa')
 #            print  os.path.join(os.path.expanduser("~"), 'itshfbc')
 #            ret = os.spawnlp(os.P_WAIT, 'voacapl', 'voacapl', os.path.join(os.path.expanduser("~"), 'itshfbc'), "area", "calc",  "pyArea.voa")
-            ret = os.spawnlp(os.P_WAIT, 'voacapl', 'voacapl', self.itshfbc_path, "area", "calc",  fName)
+#            ret = os.spawnlp(os.P_WAIT, 'voacapl', 'voacapl', self.itshfbc_path, "area", "calc",  fName)
+            cmd = 'voacapl '+self.itshfbc_path+' area calc '+fName
+            ret = subprocess.check_call(cmd.split())
+#            subprocess.check_call(cmd.split(), stdout=fLog, stderr=fLog)
+#            with open('/var/www/k2bsa/error.txt','w') as error_obj:
+#                error_obj.write('Ret: '+str(ret)+'\n')
+#                error_obj.write('Cmd: '+cmd+'\n')
+#                error_obj.write(self.itshfbc_path+'\n')
+#                error_obj.write(fName+'\n')
+#                error_obj.write('\n'.join(sys.path))
 #            ret = os.spawnlp(os.P_WAIT, 'voacapl', 'voacapl','itshfbc', "area", "calc",  fName)
 
-            if ret: 
-                e = "voacapl returned %s. Can't continue." % ret
-                return -1
+#            if ret: 
+#                e = "voacapl returned %s. Can't continue." % ret
+#                return -1
             print "done voacapl"
 
 #            s = os.path.join(os.path.expanduser("~"), 'itshfbc','areadata','pyArea.voa')

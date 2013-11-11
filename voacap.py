@@ -296,11 +296,11 @@ def run_model(shortName,dt):
   entry = views_coll.find_one({"viewName":params['viewName']})
 
   fileName          = os.path.join(root_path,'itshfbc','areadata',params['shortName']+'-pyArea')
-  outputPath  = os.path.join(root_path,'static','output',params['shortName'])
+  outputPath        = os.path.join(root_path,'static','output',params['shortName'])
   try:
-    os.makedirs(outputPath)
+      os.makedirs(outputPath)
   except:
-    pass
+      pass
 
   dt = datetime.datetime(g.params.year,g.params.month,1,g.params.utc)
 
@@ -314,6 +314,7 @@ def run_model(shortName,dt):
   _plot_parallels   = bool(int(entry['plot_parallels']))
   _plot_terminator  = bool(int(entry['plot_terminator']))
   _run_quietly      = True
+
   plot = voaAreaPlotWeb.VOAAreaPlot(fileName,
                   data_type = _data_type,
                   vg_files = _vg_files,
