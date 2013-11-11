@@ -479,6 +479,10 @@ class VOAFile:
 
     
     def write_file(self):
+        dir_name = os.path.dirname(self.filename)
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+
         f = open(self.filename, 'wt')
         f.write('Model    :VOACAP\n')
         f.write('Colors   :Black    :Blue     :Ignore   :Ignore   :Red      :Black with shading\n')
