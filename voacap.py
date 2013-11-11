@@ -29,24 +29,29 @@ templates_file    = os.path.join(root_path,'voacap_prefs','area_templ.ex')
 viewControl_fName = os.path.join(root_path,'itshfbc','areadata','pyArea')
 
 mongo         = pymongo.MongoClient()
-db            = mongo.n7qr
+db            = mongo.voacap
 views_coll    = db.entries
 stations_coll = db.stations
 
 app.config.from_envvar('FLASKR_SETTINGS',silent=True)
 
 
-
 @app.route('/')
 def show_entries():
   stations = [x for x in stations_coll.find()]
-  return render_template('index.html',stations=stations)
+
+  stations_sorted = sorted(stations, key=lambda k: float(k['frequency'])) 
+  stations_sorted = stations_sorted[::-1]
+
+  return render_template('index.html',stations=stations_sorted)
 
 @app.route('/config')
 def config():
   if not session.get('logged_in'):
     return redirect(url_for('login'))
   stations  = [x for x in stations_coll.find()]
+  stations_sorted = sorted(stations, key=lambda k: float(k['frequency'])) 
+  stations  = stations_sorted[::-1]
   entries   = [x for x in views_coll.find()]
   return render_template('config.html',entries=entries,stations=stations)
 
@@ -385,4 +390,4 @@ def plot_map(shortName=None,date=None,time=None):
   return render_template('map.html',params=params,fName=fName,dateStr=dateStr,nav=nav)
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0',port=9999)
+  app.run(host='0.0.0.0',port=5002)
