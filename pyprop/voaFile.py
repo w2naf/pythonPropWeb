@@ -479,9 +479,14 @@ class VOAFile:
 
     
     def write_file(self):
+        #These directories must exist or the program will fail!
         dir_name = os.path.dirname(self.filename)
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
+
+        run_dir = os.path.join(os.path.dirname(dir_name),'run')
+        if not os.path.exists(run_dir):
+            os.makedirs(run_dir)
 
         f = open(self.filename, 'wt')
         f.write('Model    :VOACAP\n')
