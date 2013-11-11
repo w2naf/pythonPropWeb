@@ -24,3 +24,8 @@ Things will fail if the app cannot spawn the voacapl binary at the shell.  For n
 
 The program should be updating the smoothed sunspot number (SSN) database every time the model is run. This is done in pyprop/vocapnogui.py line 129.
 This has not been well tested.
+
+The forward/backward date navigation button math needs to be re-done.  For instance,
+it won't roll over into the next year when you click "Forward Month" in December.
+November doesn't work right, either.
+Please see voacap.py lines 367 -  388.
