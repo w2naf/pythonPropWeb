@@ -29,7 +29,7 @@ templates_file    = os.path.join(root_path,'voacap_prefs','area_templ.ex')
 viewControl_fName = os.path.join(root_path,'itshfbc','areadata','pyArea')
 
 mongo         = pymongo.MongoClient()
-db            = mongo.voacap
+db            = mongo.n7qr
 views_coll    = db.entries
 stations_coll = db.stations
 

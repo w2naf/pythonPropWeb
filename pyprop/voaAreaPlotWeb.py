@@ -50,7 +50,7 @@ from mpl_toolkits.basemap import Basemap
 from optparse import OptionParser
 import pylab as P
 
-from voaAreaRect import *
+#from voaAreaRect import *
 from voaFile import *
 from hamlocation import *
 from voaPlotWindow import *
